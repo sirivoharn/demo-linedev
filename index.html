@@ -5,18 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LIFF Starter</title>
-    <link ref="stylesheet" href="css/style.css"
+    <link ref="stylesheet" href="css/style.css"> <! --- and --->
 </head>
 <body>
-    <h1></h1>
-    <p><img src="image/mok.jpg" alt=""></p>
-    <h3>ปริมาณต่อ 100 g</h3>
-    <ul>
-        <li>คาร์โบไฮเดรต 11 g</li>
-        <li>แคลอรี (kcal) 98</li>
-        <li>ไขมันทั้งหมด 4.8 g</li>
-        <li>คอเลสเตอรอล 222 mg</li>
-    </ul>
+    <h1> LiFF Profile User </h1> <! --- ดึงโปรไฟล์ User --->
+
+    <img id="pictureUrl">
+    <p id="userId"><b>userID:</b></p>
+    <p id="displayName"><b>displayName:</b></p>
+    <p id="statusMessage"><b>statusMessage:</b></p>
+    <p id="userEmail"><b>UserEmail:</b></p>
+
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+    <script>
+        async function getUserProfile(){
+            const profile = await liff.getProfile() // ดึงข้อมูล Profile ผู้ใช้
+            document.getElementById("pictureUrl").src = profile.pictureUrl
+            document.getElementById("userId").append(profile.userId)
+            document.getElementById("displayName").append(profile.displayName)
+            document.getElementById("statusMessage").append(profile.statusMessage)
+            document.getElementById("userEmail").append(liff.getDecodedIDToken().email)
+        }
+
+        async function main(){
+            await liff.init({ liffId: "1656588630-yVE1v7da" }) // intial liff id
+            // ตรวจสอบเงื่อนไขว่า login หรือยัง
+            if (liff.isLoggedIn()) {
+                getUserProfile() // ดึงข้อมูล profile
+            }
+        }
+
+        main()
+    </script>
 </body>
 </html>
