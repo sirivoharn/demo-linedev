@@ -8,24 +8,43 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1> LiFF Profile User2 </h1> <! --- ดึงโปรไฟล์ User --->
+    <h1> LiFF Profile User2 </h1> <!--- ดึงโปรไฟล์ User --->
 
     <img id="pictureUrl">
     <p id="userId"><b>userID:</b></p>
     <p id="displayName"><b>displayName:</b></p>
     <p id="statusMessage"><b>statusMessage:</b></p>
     <p id="userEmail"><b>UserEmail:</b></p>
+    <button id="btnMsg" onclick="sendMsg()">Send Message</button>
 
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
     <script>
+// ดึงข้อมูล Profile ผู้ใช้
         async function getUserProfile(){
-            const profile = await liff.getProfile() // ดึงข้อมูล Profile ผู้ใช้
+            const profile = await liff.getProfile() 
             document.getElementById("pictureUrl").src = profile.pictureUrl
             document.getElementById("userId").append(profile.userId)
             document.getElementById("displayName").append(profile.displayName)
             document.getElementById("statusMessage").append(profile.statusMessage)
             document.getElementById("userEmail").append(liff.getDecodedIDToken().email)
+        }
+// ส่งข้อความเข้าไปในห้อง chat
+        async function sendMsg(){
+            // check ว่าเปิดจาก liff หรือเป่า
+            if(liff.getContext().type !== "none"){
+                await liff.sendMessages([
+                    // sticker
+                    {
+                        "type":"sticker",
+                        "stickerId":1989,
+                        "packedId":446
+                    }
+
+                ])
+                alert("message Send")
+            }
+
         }
 
         async function main(){
