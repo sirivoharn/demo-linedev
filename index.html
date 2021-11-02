@@ -42,15 +42,31 @@
 
         // ฟังก์ชันส่งข้อความเข้าไปในห้องแชต
         async function sendMsg() {
-        if (liff.getContext().type !== "none") {
-            await liff.sendMessages([
-            {
-                "type": "sticker",
-                "stickerId": 446,
-                "packageId": 2004
-            }
-            ])
-            alert("Message sent")
+            if (liff.getContext().type !== "none") {
+                await liff.sendMessages([
+                    {
+                        "type": "sticker",
+                        "stickerId": 1,
+                        "packageId": 1
+                    },
+                    {
+                        "type":"text",
+                        "text": "This is my message"
+                    },
+                    {
+                        "type": "location",
+                        "title": "my location",
+                        "address": "1-6-1 Yotsuya, Shinjuku-ku, Tokyo, 160-0004, Japan", 
+                        "latitude": 35.687574,
+                        "longitude": 139.72922
+                    },
+                    {
+                        "type": "image",
+                        "originalContentUrl": "https://www.itgenius.co.th/assets/frondend/images/picturecourseshare/Basic_Docker_2021_Share.jpg",
+                        "previewImageUrl": "https://www.itgenius.co.th/assets/frondend/images/picturecourse/Basic_Docker_2021_cover.jpg"
+                    }
+                ])
+                alert("Message sent")
             }
         }
 
