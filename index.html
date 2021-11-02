@@ -80,7 +80,7 @@
             document.getElementById("scanCode").append(result.value)
 
         // ส่ง QR code เข้าห้องแชท
-        if (liff.getContext().type !== "none") {
+            if (liff.getContext().type !== "none") {
                 await liff.sendMessages([
                     {
                         "type":"text",
