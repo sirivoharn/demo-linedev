@@ -18,12 +18,12 @@
     <p id="userEmail"><b>UserEmail:</b></p>
 
     <p id="type"><b>type:</b> </p>
-<!--Scancode 1/1-->
+    <!--Scancode 1/4-->
     <p id="scanCode"><b>Code:</b></p>
 
     <button id="btnMsg" onclick="sendMsg()">Send Message</button>
 
-<!--Scancode 1/2-->
+    <!--Scancode 2/4-->
     <button id="btnScanCode" onclick="scanCode()">Scan Code</button>
 
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
@@ -45,7 +45,7 @@
             document.getElementById("type").append(liff.getContext().type) 
         }
 
-        // ฟังก์ชันส่งข้อความเข้าไปในห้องแชต
+        // Scancode 4/4-->ฟังก์ชันส่งข้อความเข้าไปในห้องแชต
         async function sendMsg() {
             if (liff.getContext().type !== "none") {
                 await liff.sendMessages([
@@ -74,7 +74,7 @@
                 alert("Message sent")
             }
         }
-// Scancode 1/3 สร้างฟังก์ชั่น scancode
+        // Scancode 3/4 สร้างฟังก์ชั่น scancode
         async function scanCode(){
             const result = await liff.scanCodeV2()
             document.getElementById("scanCode").append(result.value)
