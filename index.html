@@ -26,6 +26,9 @@
     <!--Scancode 2/4-->
     <button id="btnScanCode" onclick="scanCode()">Scan Code</button>
 
+    <!--openwindow 1/4-->
+    <button onclick="openWindows">Open Windows</button>
+
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
     <script>
@@ -90,6 +93,15 @@
             }
 
         }
+        // open window
+        function openWindows(){
+            liff.openWindows({
+                url:"https//line.me",
+                external:true 
+            })
+        }
+
+        // MAIN //
         async function main(){
 
             liff.ready.then(() => {
