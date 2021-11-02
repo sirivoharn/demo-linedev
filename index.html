@@ -8,53 +8,55 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1> LiFF Profile User2 </h1> <!--- ดึงโปรไฟล์ User --->
 
+    <h1>LIFF Profile User</h1>
+    
     <img id="pictureUrl">
     <p id="userId"><b>userID:</b></p>
     <p id="displayName"><b>displayName:</b></p>
     <p id="statusMessage"><b>statusMessage:</b></p>
     <p id="userEmail"><b>UserEmail:</b></p>
-    <button id="btnMsg" onclick="sendMsg()">Send Message</button>
 
     <p id="type"><b>type:</b> </p>
+
+    <button id="btnMsg" onclick="sendMsg()">Send Message</button>
 
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
     <script>
-// ดึงข้อมูล Profile ผู้ใช้
+
+        // ฟังก์ชันดึงข้อมูล Profile ผู้ใช้
         async function getUserProfile(){
-            const profile = await liff.getProfile() 
+            const profile = await liff.getProfile() // ดึงข้อมูล Profile ผู้ใช้
             document.getElementById("pictureUrl").src = profile.pictureUrl
             document.getElementById("userId").append(profile.userId)
             document.getElementById("displayName").append(profile.displayName)
             document.getElementById("statusMessage").append(profile.statusMessage)
             document.getElementById("userEmail").append(liff.getDecodedIDToken().email)
         }
-       
-        function getContext(){
-            document.getElementById("type").append(liff.getContext().type)
+
+        // สร้างฟังก์ชันอ่าน Context
+        function getContext() {
+            document.getElementById("type").append(liff.getContext().type) 
         }
-// ส่งข้อความเข้าไปในห้อง chat
-        async function sendMsg(){
-            // check ว่าเปิดจาก liff หรือเป่า
-            if(liff.getContext().type !== "none"){
-                await liff.sendMessages([
-                    // sticker
-                    {
-                        "type":"sticker",
-                        "stickerId":1989,
-                        "packedId":446
-                    }
 
-                ])
-                alert("message Send")
+        // ฟังก์ชันส่งข้อความเข้าไปในห้องแชต
+        async function sendMsg() {
+        if (liff.getContext().type !== "none") {
+            await liff.sendMessages([
+            {
+                "type": "sticker",
+                "stickerId": 1,
+                "packageId": 1
             }
-
+            ])
+            alert("Message sent")
+            }
         }
 
 
         async function main(){
+
             liff.ready.then(() => {
                 // ตรวจสอบเงื่อนไขว่า login หรือยัง
                 if (liff.isLoggedIn()) {
@@ -65,8 +67,12 @@
                 }
             })
             await liff.init({ liffId: "1656588622-1d8bEAwB" }) // intial liff id
+            
+        }
 
         main()
+
     </script>
+
 </body>
 </html>
