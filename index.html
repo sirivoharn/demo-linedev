@@ -17,6 +17,8 @@
     <p id="userEmail"><b>UserEmail:</b></p>
     <button id="btnMsg" onclick="sendMsg()">Send Message</button>
 
+    <p id="type"><b>type:</b> </p>
+
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
     <script>
@@ -28,6 +30,12 @@
             document.getElementById("displayName").append(profile.displayName)
             document.getElementById("statusMessage").append(profile.statusMessage)
             document.getElementById("userEmail").append(liff.getDecodedIDToken().email)
+        }
+        function getContext() {
+            doc
+        }
+        function getContext(){
+            document.getElementById("type").append(liff.getContext().type)
         }
 // ส่งข้อความเข้าไปในห้อง chat
         async function sendMsg(){
@@ -52,6 +60,7 @@
             // ตรวจสอบเงื่อนไขว่า login หรือยัง
             if (liff.isLoggedIn()) {
                 getUserProfile() // ดึงข้อมูล profile
+                getContext()
             }
         }
 
