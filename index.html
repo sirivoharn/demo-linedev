@@ -31,9 +31,7 @@
             document.getElementById("statusMessage").append(profile.statusMessage)
             document.getElementById("userEmail").append(liff.getDecodedIDToken().email)
         }
-        function getContext() {
-            doc
-        }
+       
         function getContext(){
             document.getElementById("type").append(liff.getContext().type)
         }
@@ -55,14 +53,18 @@
 
         }
 
+
         async function main(){
+            liff.ready.then(() => {
+                // ตรวจสอบเงื่อนไขว่า login หรือยัง
+                if (liff.isLoggedIn()) {
+                    getUserProfile() // ดึงข้อมูล profile
+                    getContext()
+                }else{
+                    liff.login()
+                }
+            })
             await liff.init({ liffId: "1656588622-1d8bEAwB" }) // intial liff id
-            // ตรวจสอบเงื่อนไขว่า login หรือยัง
-            if (liff.isLoggedIn()) {
-                getUserProfile() // ดึงข้อมูล profile
-                getContext()
-            }
-        }
 
         main()
     </script>
