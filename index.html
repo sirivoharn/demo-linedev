@@ -78,6 +78,16 @@
         async function scanCode(){
             const result = await liff.scanCodeV2()
             document.getElementById("scanCode").append(result.value)
+
+        // ส่ง QR code เข้าห้องแชท
+        if (liff.getContext().type !== "none") {
+                await liff.sendMessages([
+                    {
+                        "type": "text",
+                        "text": "Code: "+ result + value
+                    }
+                ])
+            }
         }
 
         async function main(){
