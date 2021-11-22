@@ -50,11 +50,11 @@
 
         // Scancode 4/4-->ฟังก์ชันส่งข้อความเข้าไปในห้องแชต
         async function sendMsg() {
-            if (liff.getContext().type !== "none") {
+            if (liff.getContext().type !== "none") { // check ว่าอยุ่ในห้องแชท
                 await liff.sendMessages([
                     {
                         "type": "sticker",
-                        "stickerId": 1,
+                        "stickerId": 3,
                         "packageId": 1
                     },
                     {
